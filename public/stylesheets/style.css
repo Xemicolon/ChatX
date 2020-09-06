@@ -10,8 +10,7 @@ a {
 
 .container {
   width: 600px;
-  height: 70vh;
-  margin: 0 auto;  
+  margin: 0 auto;
 }
 
 .heading {
@@ -59,14 +58,16 @@ a {
   margin-left: 10px;
 }
 
-.username, .room {
+.username,
+.room {
   border: 2px solid #000;
   border-radius: 8px;
   padding: 12px;
   outline: none;
 }
 
-.usn, .rm {
+.usn,
+.rm {
   padding-bottom: .4rem;
   font-size: .87rem;
 }
@@ -98,17 +99,20 @@ a {
   padding-top: 10px;
 }
 
-.private-link, .logout-link {
+.private-link,
+.logout-link {
   text-decoration: none;
   color: #000;
   position: relative;
 }
 
-.private-link:hover, .logout-link:hover {
+.private-link:hover,
+.logout-link:hover {
   color: #000;
 }
 
-.private-link::before, .logout-link::before {
+.private-link::before,
+.logout-link::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -121,7 +125,8 @@ a {
   transition: all 0.3s ease-in-out 0s;
 }
 
-.private-link:hover::before, .logout-link:hover::before {
+.private-link:hover::before,
+.logout-link:hover::before {
   visibility: visible;
   transform: scaleX(1);
 }
@@ -148,6 +153,10 @@ a {
   padding: 0px 20px;
 }
 
+.chat-header-mobile {
+  display: none;
+}
+
 .leave-room {
   margin: 0;
 }
@@ -172,7 +181,9 @@ a {
   justify-content: space-evenly;
 }
 
-.room-section, .user-section, .logout {
+.room-section,
+.user-section,
+.logout {
   padding-left: 20px;
 }
 
@@ -194,17 +205,17 @@ a {
 
 /* Track */
 .username-list::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 .username-list::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 .username-list::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 .user {
@@ -273,7 +284,8 @@ a {
   align-items: center;
 }
 
-.user-1, .user-2 {
+.user-1,
+.user-2 {
   display: flex;
   flex-flow: column;
   word-break: break-all;
@@ -310,7 +322,13 @@ picture {
   padding: 0 10px;
 }
 
-.leave-btn {
+.close-btn {
+  display: none;
+}
+
+.leave-btn,
+.menu-btn,
+.close-btn {
   padding: 10px;
   background: #fff;
   box-shadow: 2px 3px 0px 0px #545454;
@@ -320,7 +338,9 @@ picture {
   transition: .6s ease-in;
 }
 
-.leave-btn:hover {
+.leave-btn:hover,
+.menu-btn:hover,
+.close-btn:hover {
   background-color: #000;
   color: #fff;
   box-shadow: none;
@@ -350,4 +370,167 @@ picture {
 footer {
   color: #fff;
   text-align: center;
+}
+
+
+
+@media screen and (max-width: 500px) {
+  .welcome {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 750px) {
+
+  .container {
+    width: 90% !important;
+  }
+
+  .chat-message {
+    width: 65% !important;
+    margin-right: 10px;
+  }
+
+  .chat-btn {
+    width: 25% !important;
+  }
+
+}
+
+
+
+@media screen and (max-width: 750px) {
+
+  body {
+    padding: 0;
+    padding-top: 45px;
+  }
+
+  .chat-section {
+    flex-flow: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-radius: 0;
+    display: none;
+  }
+
+
+  .user1-window {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .user2-window {
+    width: 100%;
+  }
+
+  .user1 {
+    width: 100%;
+    margin: 0 10px;
+  }
+
+  .user2 {
+    width: 100%;
+    margin: 0 10px;
+  }
+
+  .chat-header {
+    display: none;
+  }
+
+  .sidebar-mobile {
+    display: flex;
+    padding: 27px 0;
+  }
+
+  .chat-header-mobile {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #dcdcdc;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0px 20px;
+  }
+
+  .room-section {
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 150px;
+    margin: auto;
+  }
+
+  .user-section {
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+  }
+
+  .logout {
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 150px;
+    margin: auto;
+  }
+
+  .username-list {
+    width: 100%;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 5px;
+  }
+
+  .room-name {
+    width: auto;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .chatForm {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .chat-message {
+    width: 70%;
+  }
+
+  .chat-btn {
+    width: 25%;
+  }
+
+  .chat-form {
+    border-bottom-left-radius: 10px;
+  }
+
+}
+
+@media screen and (min-width: 750px) {
+  .sidebar {
+    display: flex !important;
+  }
+
+  .chatForm {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .chat-message {
+    width: 70%;
+    margin-right: 10px;
+  }
+
+  .chat-btn {
+    width: 25%;
+  }
 }

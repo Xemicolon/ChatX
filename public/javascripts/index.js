@@ -1,9 +1,8 @@
 const loginDetails = document.querySelector(".form");
 const chatMessages = document.querySelector(".chat-messages");
 
-
 loginDetails.addEventListener("submit", (e) => {
-  e.preventDefault()
+  e.preventDefault();
   let user = {
     username: e.target.elements.username.value,
     room: e.target.elements.room.value,
@@ -21,8 +20,8 @@ loginDetails.addEventListener("submit", (e) => {
       return data.json();
     })
     .then((response) => {
-      if(response.success === true){
-        window.location.href = '/chat'
+      if (response.success === true) {
+        window.location.href = "/chat";
       }
     });
 });

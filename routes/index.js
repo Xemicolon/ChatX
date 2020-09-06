@@ -42,15 +42,15 @@ router.get("/chat", (req, res, next) => {
   }
 });
 
-router.get('/private', (req, res, next) => {
+router.get("/private", (req, res, next) => {
   res.send(`I am currently working on this page.. Check back pretty soon 😉😉
-  <a href="/">Go back</a>`)
-})
+  <a href="/">Go back</a>`);
+});
 
-router.get('/logout', (req, res, next) => {
-  res.clearCookie('user')
-  res.clearCookie('io')
-  res.redirect('/')
-})
+router.get("/logout", (req, res, next) => {
+  res.clearCookie("user");
+  res.clearCookie("io");
+  res.redirect("/");
+});
 
 module.exports = router;

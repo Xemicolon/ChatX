@@ -1,16 +1,25 @@
 const { formatMessage } = require("./message");
-const { getCurrentUser, userLogin, userLogout, getRoomUsers } = require("./user");
+const {
+  getCurrentUser,
+  userLogin,
+  userLogout,
+  getRoomUsers,
+} = require("./user");
 
-const chatBotName = 'ChatXBot'
+const chatBotName = "ChatXBot";
 
-exports.chatMessage = (x) => {
-  x.on("connection", (socket) => {
+exports.chatMessage = (io) => {
+  io.on("connection", (socket) => {
+
     // User joins room
     socket.on("joinRoom", ({ username, room }) => {
       const user = userLogin(socket.id, username, room);
       socket.join(user.room);
 
-      socket.emit("chatBotMessage", formatMessage(chatBotName, `Heyy 👋🏼, Welcome to the ${room} room`));
+      socket.emit(
+        "chatBotMessage",
+        formatMessage(chatBotName, `Heyy 👋🏼, Welcome to the ${room} room`)
+      );
 
       // Broadcast when a new user connects to chat
       socket.broadcast
@@ -20,16 +29,19 @@ exports.chatMessage = (x) => {
           formatMessage(chatBotName, `${user.username} joined chat`)
         );
 
-        x.to(user.room).emit('allRoomUsers', {
-          room: user.room,
-          users: getRoomUsers(user.room)
-        })
+      io.to(user.room).emit("allRoomUsers", {
+        room: user.room,
+        users: getRoomUsers(user.room),
+      });
 
-      // listen from client
+      // listen from client for messages
       socket.on("message", (message) => {
-        console.log(message)
+        console.log(message);
         const user = getCurrentUser(socket.id);
-        x.to(user.room).emit("userMessage", formatMessage(user.username, message));
+        io.to(user.room).emit(
+          "userMessage",
+          formatMessage(user.username, message)
+        );
       });
     });
 
@@ -37,15 +49,14 @@ exports.chatMessage = (x) => {
     socket.on("disconnect", () => {
       const user = userLogout(socket.id);
       if (user) {
-        x.to(user.room).emit(
+        io.to(user.room).emit(
           "user disconnected",
           formatMessage(chatBotName, `${user.username} left chat`)
         );
-        x.to(user.room).emit('allRoomUsers', {
+        io.to(user.room).emit("allRoomUsers", {
           room: user.room,
-          users: getRoomUsers(user.room)
-        })
-        console.log("Disconnected...");
+          users: getRoomUsers(user.room),
+        });
       }
     });
   });

@@ -4,22 +4,30 @@ const roomName = document.querySelector(".room-name");
 const userList = document.querySelector(".username-list");
 const logout = document.querySelector(".logout-link");
 const leaveBtn = document.querySelector(".leave-btn");
+const menuBtn = document.querySelector(".menu-btn");
+const closeBtn = document.querySelector(".close-btn");
+const sidebar = document.querySelector(".sidebar");
 
 const socket = io();
 let user = localStorage.getItem("user");
 user = JSON.parse(user);
 
+// listen for connection from server
 socket.on("connection", (message) => {
   outputMessage(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
+
+// emit user to room
 socket.emit("joinRoom", user);
 
+// listen on user connection from server
 socket.on("user connected", (message) => {
   outputMessage(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+// get all users from server
 socket.on("allRoomUsers", ({ room, users }) => {
   outputRoom(room);
   outputUsers(users);
@@ -30,14 +38,30 @@ socket.on("chatBotMessage", (message) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+// listen to messages from other person from server
 socket.on("userMessage", (message) => {
-  outputUserMessage(message);
+  outputMessageFromServer(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+// listen to when a user disconnects
 socket.on("user disconnected", (message) => {
   outputMessage(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+menuBtn.addEventListener("click", () => {
+  menuBtn.style.display = "none";
+  closeBtn.style.display = "block";
+  sidebar.style.display = "flex";
+  sidebar.classList.add("sidebar-mobile");
+});
+
+closeBtn.addEventListener("click", () => {
+  closeBtn.style.display = "none";
+  menuBtn.style.display = "block";
+  sidebar.style.display = "none";
+  sidebar.classList.remove("sidebar-mobile");
 });
 
 chatForm.addEventListener("submit", (e) => {
@@ -45,7 +69,7 @@ chatForm.addEventListener("submit", (e) => {
   let msg = e.target.elements.chat;
   let message = msg.value;
   let username = user.username;
-  outputMessageFromUser(message, username);
+  outputMessageFromUser(username, message);
   socket.emit("message", msg.value);
   msg.value = "";
   msg.focus();
@@ -89,7 +113,7 @@ function outputMessageFromUser(username, message) {
   document.querySelector(".chat-messages").appendChild(div);
 }
 
-function outputUserMessage(message) {
+function outputMessageFromServer(message) {
   if (message.username !== "ChatXBot" && user.username !== message.username) {
     const div = document.createElement("div");
     div.classList.add("user1-window");
