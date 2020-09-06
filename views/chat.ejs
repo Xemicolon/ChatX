@@ -1,0 +1,55 @@
+<% include partials/header.ejs %>
+<div class="chat-container">
+  <div class="chat-box">
+
+    <div class="chat-header">
+      <h1 class="chat-heading">ChatX</h1>
+      <button class="leave-btn">Leave room</button>
+    </div>
+
+    <div class="chat-section">
+
+      <div class="sidebar">
+        <div class="sidebar-container">
+          <div class="room-section">
+            <h2>Room Name</h2>
+            <p class="room-name"></p>
+          </div>
+
+          <div class="user-section">
+            <h2>Users</h2>
+            <ul class="username-list">
+            </ul>
+          </div>
+
+          <div class="logout">
+            <h2> <a href="/" class="logout-link">Leave room</a></h2>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="chat-window">
+        <div class="chat-messages">
+          
+        </div>
+
+        <div class="chat-form">
+          <form action="/chat" class="chatForm" method="POST">
+            <input type="text" placeholder="Type your message here" name="chat" class="chat-message" autofocus>
+            <button class="chat-btn">Send</button>
+          </form>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <footer>
+    <p>Made with ❤ by Xemicolon</p>
+  </footer>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascripts/chat.js"></script>
+  <% include partials/footer.ejs %>
