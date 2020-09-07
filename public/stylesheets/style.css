@@ -374,13 +374,13 @@ footer {
 
 
 
-@media screen and (max-width: 500px) {
+@media only screen and (max-width: 500px) {
   .welcome {
     width: 100%;
   }
 }
 
-@media screen and (min-width: 200px) and (max-width: 750px) {
+@media only screen and (min-width: 200px) and (max-width: 750px) {
 
   .container {
     width: 90% !important;
@@ -399,7 +399,7 @@ footer {
 
 
 
-@media screen and (max-width: 750px) {
+@media only screen and (max-width: 750px) {
 
   body {
     padding: 0;
@@ -515,7 +515,7 @@ footer {
 
 }
 
-@media screen and (min-width: 750px) {
+@media only screen and (min-width: 750px) {
   .sidebar {
     display: flex !important;
   }
